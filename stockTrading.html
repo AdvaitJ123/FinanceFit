@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Trading</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #3e9c35;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+        }
+        nav {
+            background: #333;
+            color: #fff;
+            padding: 1em 0;
+        }
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.5em;
+        }
+        .nav-links {
+            list-style: none;
+            padding: 0;
+        }
+        .nav-links li {
+            display: inline;
+            margin: 0 1em;
+        }
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+        }
+        footer {
+            background: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1em 0;
+            margin-top: 500px;
+        }
+        /* Body background color */
+        body {
+            background-color: #f0f8f0; /* Light green */
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Container styles */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Button styles */
+        button {
+            padding: 10px 20px;
+            margin: 10px 20px;
+            background-color: #4CAF50; /* Green */
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        /* Dropdown select styles */
+        #brokerSelect {
+            padding: 10px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        /* Button container */
+        .button-container {
+            margin-top: 10px;
+        }
+
+        /* Iframe container */
+        #iframeContainer {
+            margin-top: 20px;
+        }
+        /* Style for popup container */
+        .popup-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+            z-index: 9999; /* Ensure the popup is on top of other elements */
+        }
+
+        /* Style for popup content */
+        .popup-content {
+            background-color: #fff; /* White background */
+            width: 70%; /* Adjust width as needed */
+            height: 70%; /* Adjust height as needed */
+            margin: 15% auto; /* Center the popup vertically and horizontally */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); /* Add shadow effect */
+            overflow-y: auto; /* Allow scrolling if content exceeds height */
+        }
+        /* Style for iframe container */
+        #iframeContainer {
+            margin-top: 20px;
+            width: 100%; /* Adjust width as needed */
+            height: 800px; /* Adjust height as needed */
+        }
+
+        /* Style for iframe */
+        iframe {
+            width: 100%;
+            height: 1000px; /* Make the iframe fill its container */
+            border: none;
+        }
+        #brokeroptions{
+            margin-left: 20px;
+        }
+    </style>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="container">
+            <h1 class="logo">FinanceFit</h1>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="stockTrading.html">Stock Trading</a></li>
+                <li><a href="loginSignUp.html">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <link rel="stylesheet" href="styles.css">
+    <!-- Button to choose broker -->
+    <button style="display: block; margin: auto; margin-top: 20px;" id="chooseBrokerButton">Choose Broker</button>
+    
+    <!-- Broker options dropdown -->
+    <div id="brokerOptions" style="display: none; text-align: center;">
+        <label style="display: inline-block; text-align: center; line-height: 150%;" for="brokerSelect">Select Broker:</label>
+        <select style="display: inline-block; margin: auto;" id="brokerSelect">
+            <option value="robinhood">Robinhood</option>
+            <option value="fidelity">Fidelity</option>
+            <option value="etrade">E*Trade</option>
+            <option value="firstrade">Firstrade</option>
+            <option value="tdameritrade">TD Ameritrade</option>
+        </select>
+        <button style="display: inline-block; margin: auto;" id="openBrokerButton">Open Broker</button>
+        <button style="display: inline-block; margin: auto;" id="redirectButton">Redirect</button>
+    </div>
+    
+    <!-- Container for iframe -->
+    <div id="iframeContainer" style="display: none;">
+        <iframe id="brokerIframe" title="Broker Website"></iframe>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('chooseBrokerButton').addEventListener('click', function() {
+                document.getElementById('brokerOptions').style.display = 'block';
+            });
+
+            document.getElementById('openBrokerButton').addEventListener('click', function() {
+                let selectedBroker = document.getElementById('brokerSelect').value;
+                if (selectedBroker === 'robinhood') {
+                    document.getElementById('iframeContainer').style.display = 'block';
+                    document.getElementById('brokerIframe').src = 'https://www.bing.com/ck/a?!&&p=f3e2905724097883JmltdHM9MTcxNzg5MTIwMCZpZ3VpZD0wOTkyYzg1YS03MGI2LTZhYjItMWE3NS1kY2QxNzEzOTZiOWImaW5zaWQ9NTIwNQ&ptn=3&ver=2&hsh=3&fclid=0992c85a-70b6-6ab2-1a75-dcd171396b9b&psq=robinhood&u=a1aHR0cHM6Ly9yb2Jpbmhvb2QuY29tLw&ntb=1';
+                } else if (selectedBroker === 'fidelity') {
+                    document.getElementById('iframeContainer').style.display = 'block';
+                    document.getElementById('brokerIframe').src = 'https://www.fidelity.com/';
+                } else if (selectedBroker === 'etrade') {
+                    document.getElementById('iframeContainer').style.display = 'block';
+                    document.getElementById('brokerIframe').src = 'https://www.bing.com/ck/a?!&&p=99741d53e544f88dJmltdHM9MTcxNzg5MTIwMCZpZ3VpZD0wOTkyYzg1YS03MGI2LTZhYjItMWE3NS1kY2QxNzEzOTZiOWImaW5zaWQ9NTE5NA&ptn=3&ver=2&hsh=3&fclid=0992c85a-70b6-6ab2-1a75-dcd171396b9b&psq=e*trade+financial+log+on&u=a1aHR0cHM6Ly91cy5ldHJhZGUuY29tL2UvdC91c2VyL2xvZ2lu&ntb=1';
+                } else if (selectedBroker === 'firstrade') {
+                    document.getElementById('iframeContainer').style.display = 'block';
+                    document.getElementById('brokerIframe').src = 'https://www.firstrade.com/';
+                } else if (selectedBroker === 'tdameritrade') {
+                    document.getElementById('iframeContainer').style.display = 'block';
+                    document.getElementById('brokerIframe').src = 'https://www.schwab.com/td-ameritrade';
+                }
+            });
+
+            document.getElementById('redirectButton').addEventListener('click', function() {
+                let selectedBroker = document.getElementById('brokerSelect').value;
+                if (selectedBroker === 'robinhood') {
+                    window.location.href = 'https://www.bing.com/ck/a?!&&p=f3e2905724097883JmltdHM9MTcxNzg5MTIwMCZpZ3VpZD0wOTkyYzg1YS03MGI2LTZhYjItMWE3NS1kY2QxNzEzOTZiOWImaW5zaWQ9NTIwNQ&ptn=3&ver=2&hsh=3&fclid=0992c85a-70b6-6ab2-1a75-dcd171396b9b&psq=robinhood&u=a1aHR0cHM6Ly9yb2Jpbmhvb2QuY29tLw&ntb=1';
+                } else if (selectedBroker === 'fidelity') {
+                    window.location.href = 'https://www.fidelity.com/';
+                } else if (selectedBroker === 'etrade') {
+                    window.location.href = 'https://www.bing.com/ck/a?!&&p=99741d53e544f88dJmltdHM9MTcxNzg5MTIwMCZpZ3VpZD0wOTkyYzg1YS03MGI2LTZhYjItMWE3NS1kY2QxNzEzOTZiOWImaW5zaWQ9NTE5NA&ptn=3&ver=2&hsh=3&fclid=0992c85a-70b6-6ab2-1a75-dcd171396b9b&psq=e*trade+financial+log+on&u=a1aHR0cHM6Ly91cy5ldHJhZGUuY29tL2UvdC91c2VyL2xvZ2lu&ntb=1';
+                } else if (selectedBroker === 'firstrade') {
+                    window.location.href = 'https://www.firstrade.com/';
+                } else if (selectedBroker === 'tdameritrade') {
+                    window.location.href = 'https://www.schwab.com/td-ameritrade';
+                }
+            });
+        });
+    </script>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p style="color: white;">&copy; 2024 FinanceFit. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #3e9c35;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+        }
+        nav {
+            background: #333;
+            color: #fff;
+            padding: 1em 0;
+        }
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.5em;
+        }
+        .nav-links {
+            list-style: none;
+            padding: 0;
+        }
+        .nav-links li {
+            display: inline;
+            margin: 0 1em;
+        }
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+        }
+        footer {
+            background: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1em 0;
+            margin-bottom: 0%;
+        }
+        .form-container {
+            display: block;
+            margin: auto;
+            text-align: center;
+        }
+        .form-container input, .form-container select {
+            padding: 10px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            background-color: #fff;
+            color: #333;
+        }
+        .form-container input[type="submit"] {
+            background-color: #333;
+            color: #fff;
+            cursor: pointer;
+        }
+    </style>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="container">
+            <h1 class="logo">FinanceFit</h1>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="stockTrading.html">Stock Trading</a></li>
+                <li><a href="loginSignUp.html">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="form-container">
+        <h2 style="color: #fff;">About You</h2>
+        <form id="contactForm">
+            <label for="name" style="color: #fff;">Name:</label>
+            <input type="text" id="name" name="name" required><br><br>
+            <label for="email" style="color: #fff;">Email:</label>
+            <input type="email" id="email" name="email" required><br><br>
+            <label for="age" style="color: #fff;">Age:</label>
+            <input type="number" id="age" name="age" required min="18" max="100"><br><br>
+            <label for="investInStocks" style="color: #fff;">Do you invest in stocks?</label>
+            <select id="investInStocks" name="investInStocks" required>
+                <option value="no" selected>No</option>
+                <option value="yes">Yes</option>
+            </select><br><br>
+            <div id="stockInvestmentDetails" style="display: none;">
+                <label for="numberOfStocks" style="color: #fff;">Number of stocks invested in:</label>
+                <input type="number" id="numberOfStocks" name="numberOfStocks" min="0"><br><br>
+                <label for="investmentProfit" style="color: #fff;">Amount made from investments:</label>
+                <input type="number" id="investmentProfit" name="investmentProfit" min="0"><br><br>
+            </div><br>
+            <label for="stockAdvisor" style="color: #fff;">If yes, what stock advisor do you use?</label>
+            <input type="text" id="stockAdvisor" name="stockAdvisor"><br><br>
+            <label for="useFinancialAdvisor" style="color: #fff;">Do you use a financial advisor?</label>
+            <select id="useFinancialAdvisor" name="useFinancialAdvisor" required>
+                <option value="no" selected>No</option>
+                <option value="yes">Yes</option>
+            </select><br><br>
+            <div id="financialAdvisorDetails" style="display: none;">
+                <label for="financialAdvisorCompany" style="color: #fff;">Financial advisor company:</label>
+                <input type="text" id="financialAdvisorCompany" name="financialAdvisorCompany"><br><br>
+            </div><br><br>
+
+            <!-- Risk Tolerance Factors -->
+            <label for="financialStability" style="color: #fff;">Financial Stability (0-10):</label>
+            <input type="number" id="financialStability" name="financialStability" min="0" max="10" step="0.1" required><br><br>
+            <label for="investmentHorizon" style="color: #fff;">Investment Horizon (0-10):</label>
+            <input type="number" id="investmentHorizon" name="investmentHorizon" min="0" max="10" step="0.1" required><br><br>
+            <label for="investmentKnowledge" style="color: #fff;">Investment Knowledge (0-10):</label>
+            <input type="number" id="investmentKnowledge" name="investmentKnowledge" min="0" max="10" step="0.1" required><br><br>
+            <label for="psychologicalFactor" style="color: #fff;">Psychological Factor (0-10):</label>
+            <input type="number" id="psychologicalFactor" name="psychologicalFactor" min="0" max="10" step="0.1" required><br><br>
+
+            <input type="submit" value="Done"><br><br>
+        </form>
+        <div id="riskToleranceResult" style="color: #fff; font-size: 18px; margin-top: 20px;"></div>
+    </div>
+
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the form from submitting normally
+
+            // Get form data
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                age: parseInt(document.getElementById('age').value),
+                investInStocks: document.getElementById('investInStocks').value,
+                numberOfStocks: parseInt(document.getElementById('numberOfStocks').value),
+                investmentProfit: parseInt(document.getElementById('investmentProfit').value),
+                stockAdvisor: document.getElementById('stockAdvisor').value,
+                useFinancialAdvisor: document.getElementById('useFinancialAdvisor').value,
+                financialAdvisorCompany: document.getElementById('financialAdvisorCompany').value,
+                financialStability: parseFloat(document.getElementById('financialStability').value),
+                investmentHorizon: parseFloat(document.getElementById('investmentHorizon').value),
+                investmentKnowledge: parseFloat(document.getElementById('investmentKnowledge').value),
+                psychologicalFactor: parseFloat(document.getElementById('psychologicalFactor').value)
+            };
+
+            // Calculate additional factors
+            let ageScore;
+            if (formData.age < 25 || formData.age > 60) {
+                ageScore = 200;
+            } else {
+                ageScore = 500;
+            }
+
+            let experienceScore = 0;
+            let profitScore = 0;
+
+            if (formData.investInStocks === 'yes') {
+                experienceScore = formData.numberOfStocks >= 10 ? 400 : 200;
+                if (formData.investmentProfit > 10000) {
+                    profitScore = 900;
+                } else if (formData.investmentProfit >= 1000 && formData.investmentProfit <= 10000) {
+                    profitScore = 600;
+                } else {
+                    profitScore = 300;
+                }
+            }
+
+            const advisorScore = formData.useFinancialAdvisor === 'yes' ? 700 : 500;
+            const stockAdvisorScore = formData.stockAdvisor ? 700 : 500;
+
+            // Calculate Risk Tolerance
+            const baseline = 500;
+            const riskTolerance = (
+                baseline +
+                (formData.financialStability * 50) +
+                (formData.investmentHorizon * 50) +
+                (formData.investmentKnowledge * 50) +
+                ageScore +
+                experienceScore +
+                profitScore +
+                advisorScore +
+                stockAdvisorScore
+            ) * (formData.psychologicalFactor / 10);
+
+            const riskTolerancePercentage = Math.round((riskTolerance / 1000) * 100);
+
+            // Display the result
+            const resultDiv = document.getElementById('riskToleranceResult');
+            resultDiv.innerHTML = `Your risk tolerance is ${riskTolerancePercentage} out of 520.`;
+
+            // Store form data in localStorage
+            localStorage.setItem('formData', JSON.stringify(formData));
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const investInStocksSelect = document.getElementById('investInStocks');
+            const stockInvestmentDetails = document.getElementById('stockInvestmentDetails');
+            const useFinancialAdvisorSelect = document.getElementById('useFinancialAdvisor');
+            const financialAdvisorDetails = document.getElementById('financialAdvisorDetails');
+
+            investInStocksSelect.addEventListener('change', function() {
+                if (investInStocksSelect.value === 'yes') {
+                    stockInvestmentDetails.style.display = 'block';
+                } else {
+                    stockInvestmentDetails.style.display = 'none';
+                }
+            });
+
+            useFinancialAdvisorSelect.addEventListener('change', function() {
+                if (useFinancialAdvisorSelect.value === 'yes') {
+                    financialAdvisorDetails.style.display = 'block';
+                } else {
+                    financialAdvisorDetails.style.display = 'none';
+                }
+            });
+        });
+    </script>
+
+    <!-- Footer -->
+    <footer style="margin-top: 200px;">
+        <div class="container">
+            <p style="color: white;">&copy; 2024 FinanceFit. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

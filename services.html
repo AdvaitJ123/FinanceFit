@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+        }
+        nav {
+            background: #333;
+            color: #fff;
+            padding: 1em 0;
+        }
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.5em;
+        }
+        .nav-links {
+            list-style: none;
+            padding: 0;
+        }
+        .nav-links li {
+            display: inline;
+            margin: 0 1em;
+        }
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+        }
+        .hero {
+            background: url('hero-bg.jpg') no-repeat center center/cover;
+            color: #fff;
+            text-align: center;
+            padding: 2em 0;
+        }
+        .hero h2 {
+            font-size: 2.5em;
+            margin: 0;
+        }
+        .hero p {
+            font-size: 1.2em;
+        }
+        .hero .btn {
+            background: #f60;
+            color: #fff;
+            padding: 0.5em 2em;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 1em;
+        }
+        .services {
+            background-color: #3e9c35;
+            padding: 2em 0;
+        }
+        .services h2 {
+            text-align: center;
+            margin-bottom: 1em;
+        }
+        .service-card {
+            background: #fff;
+            padding: 1em;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 1em;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            width: 100%;
+        }
+        footer {
+            background: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1em 0;
+            margin-bottom: 0%;
+        }
+    </style>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="container">
+            <h1 class="logo">FinanceFit</h1>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="stockTrading.html">Stock Trading</a></li>
+                <li><a href="loginSignUp.html">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2>Our Services</h2>
+            <a href="profile.html">
+                <button class="service-card">
+                    <h3>Investment Planning</h3>
+                    <p>Maximize your returns with our strategic investment planning services.</p>
+                </button>
+            </a>
+            <a href="stockTrading.html">
+                <button class="service-card">
+                    <h3>Buying and Selling Stocks</h3>
+                    <p>Easily buying stocks to make more money in a smart way.</p>
+                </button>
+            </a>
+            <a href="profile.html">
+                <button class="service-card">
+                    <h3>Viewing Current Stocks</h3>
+                    <p>Viewing and controlling your profile.</p>
+                </button>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p style="color: white;">&copy; 2024 FinanceFit. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
